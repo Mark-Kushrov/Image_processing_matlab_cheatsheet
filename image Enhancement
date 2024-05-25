@@ -1,0 +1,25 @@
+מתחיחה למקוטעין
+clear all; close all;
+img = double(imread('pout.tif'));
+% use pout.tif with   x1 y1 = [75 1]    x2 y2 = [150 220]
+% use mri.tif with   x1 y1 = [1 1]    x2 y2 = [90 225]
+
+imshow(uint8(img));
+figure; imist(uint8(img));
+
+p1 = input('enter 1st point [origin=75 target=1] :');
+p2 = input('enter 2nd point [origin=175 target=255] :');
+
+% plot streching graph//מייצרים את משוואות הקו הישר
+tan = y1/x1;     tan2=(y2-y1)/(x2-x1);     tan3=(255-y2)/(255-x2);
+
+
+
+i = 1:x1;       g(i) = tan1*(i-1);
+i = x1:x2;      g(i)=y1+(i-x1)*tan2;
+i = x2:255+1;   g(i)=y2+(i-x2)*tan3;
+figure; plot(g);
+
+img(:,:)=g(img(:,:)+1);
+
+figure; imshow(uint8(img));     figure; imhist(uint8(img));
